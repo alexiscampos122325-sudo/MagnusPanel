@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Canales - MagnusPanel</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:white}
+.sidebar{width:250px;height:100vh;background:#111827;position:fixed;padding:20px}
+.sidebar h2{color:#3b82f6}
+.sidebar a{display:block;color:white;text-decoration:none;margin-top:15px;padding:10px;border-radius:10px;background:#1f2937}
+.sidebar a:hover{background:#374151}
+.main{margin-left:270px;padding:20px}
+.card{background:#1e293b;padding:20px;border-radius:15px;margin-top:20px}
+input,select{padding:10px;margin:5px;border-radius:8px;border:none}
+button{padding:10px 15px;border:none;border-radius:8px;background:#3b82f6;color:white;cursor:pointer}
+table{width:100%;margin-top:20px;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #334155;text-align:left}
+.badge{padding:5px 10px;border-radius:8px;background:#16a34a}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>MagnusPanel</h2>
+
+  <a href="/dashboard">🏠 Dashboard</a>
+  <a href="/users">👥 Usuarios</a>
+  <a href="/bots">🤖 Mis Bots</a>
+  <a href="/channels">📢 Canales</a>
+  <a href="/payments">💰 Pagos</a>
+  <a href="/keys">🔑 Keys</a>
+  <a href="/plans">📦 Planes</a>
+  <a href="/logs">📜 Logs</a>
+  <a href="/settings">⚙️ Config</a>
+  <a href="/logout">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+  <h1>📢 Canales</h1>
+
+  <div class="card">
+
+    <h2>Agregar Canal</h2>
+
+    <form method="POST" action="/channels/add">
+
+      <select name="bot_id" required>
+        {{BOT_OPTIONS}}
+      </select>
+
+      <input
+        type="text"
+        name="chat_id"
+        placeholder="@canal o chat_id"
+        required
+      >
+
+      <button type="submit">
+        Agregar Canal
+      </button>
+
+    </form>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Canales conectados</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Canal</th>
+          <th>Bot</th>
+          <th>Chat ID</th>
+          <th>Fecha</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {{CHANNELS}}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+<form method="POST" action="/channels/test">
+
+  <input type="hidden" name="token" value="{{TOKEN}}">
+  
+  <input type="hidden" name="chat_id" value="{{CHAT_ID}}">
+
+  <button type="submit">
+    Test
+  </button>
+
+</form>
+
+</body>
+</html>
